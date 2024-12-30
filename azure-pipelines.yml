@@ -31,9 +31,3 @@ steps:
   - script: npm run build
     displayName: "Build the application"
 
-  # Step 6: Publish artifacts (optional)
-  - task: PublishBuildArtifacts@1
-    inputs:
-      PathtoPublish: 'dist'
-      ArtifactName: 'drop'
-      publishLocation: 'Container'
