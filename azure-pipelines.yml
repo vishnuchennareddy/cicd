@@ -15,7 +15,6 @@ steps:
     displayName: "Checkout code"
 
   # Step 2: Set up Node.js environment
-  - task: UseNode@2
     inputs:
       version: '16.x'
 
