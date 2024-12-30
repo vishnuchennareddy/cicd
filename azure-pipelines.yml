@@ -1,0 +1,39 @@
+# azure-pipelines.yml
+
+# Trigger the pipeline on changes to the 'main' branch
+trigger:
+  - main
+
+# Define the build agent
+pool:
+  vmImage: 'ubuntu-latest'
+
+# Define the steps to run
+steps:
+  # Step 1: Check out the code from the repository
+  - task: Checkout@1
+    displayName: "Checkout code"
+
+  # Step 2: Set up Node.js environment
+  - task: UseNode@2
+    inputs:
+      version: '16.x'
+
+  # Step 3: Install dependencies
+  - script: npm install
+    displayName: "Install dependencies"
+
+  # Step 4: Run tests (update test command in package.json)
+  - script: npm test
+    displayName: "Run tests"
+
+  # Step 5: Build the application
+  - script: npm run build
+    displayName: "Build the application"
+
+  # Step 6: Publish artifacts (optional)
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: 'dist'
+      ArtifactName: 'drop'
+      publishLocation: 'Container'
